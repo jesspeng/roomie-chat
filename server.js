@@ -17,6 +17,8 @@ let chore2;
 let chore3;
 let chore4;
 
+let online;
+
 // Connect to mongodb
 mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomiechat', function(err, client) {
   if (err) {
@@ -34,6 +36,8 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
   chore2 = db.collection('chore2');
   chore3 = db.collection('chore3');
   chore4 = db.collection('chore4');
+
+  online = db.collection('online');
 
   // Connect to socket.io
   client.on('connection', function(socket) {
@@ -97,17 +101,18 @@ app.get('/', function(req, res) {
     chore2.find().toArray(function (err, result2) {
       chore3.find().toArray(function (err, result3) {
         chore4.find().toArray(function (err, result4) {
-          // console.log(result);
-          if (err) {
-            throw err;
-          }
-          res.render('index.ejs', {
-            chore1: result1,
-            chore2: result2,
-            chore3: result3,
-            chore4: result4
-          });
-
+          online.find().toArray(function (err, result5) {
+            if (err) {
+              throw err;
+            }
+            res.render('index.ejs', {
+              chore1: result1,
+              chore2: result2,
+              chore3: result3,
+              chore4: result4,
+              online: result5
+            });
+          })
         })
       })
     })
@@ -157,6 +162,19 @@ app.post('/chore4', function (req, res) {
    // console.log(req.body);
 
   chore4.save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    // console.log('saved to database');
+    res.redirect('/');
+  });
+});
+
+app.post('/online', function (req, res) {
+   // console.log(req.body);
+
+  online.save(req.body, function (err, result) {
     if (err) {
       throw err;
     }
