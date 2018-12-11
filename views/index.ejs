@@ -60,7 +60,6 @@
             <% if (typeof chore2 ==='object' && chore2) { %>
               <div class="assigned"><%= chore2[chore2.length - 1].roomie %></div>
               <% } %>
-
             <form action="/chore2" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
@@ -69,9 +68,9 @@
 
           <div id="chore3" class="col chore">
             <u>Floor</u>-Vacuum floor (once a week), mop as needed
-
-
-
+            <% if (typeof chore3 ==='object' && chore3) { %>
+              <div class="assigned"><%= chore3[chore3.length - 1].roomie %></div>
+              <% } %>
             <form action="/chore3" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
@@ -80,9 +79,9 @@
 
           <div id="chore4" class="col chore">
             <u>Kitchen</u>-Wipe stove top and kitchen counter
-
-
-
+            <% if (typeof chore4 ==='object' && chore4) { %>
+              <div class="assigned"><%= chore4[chore4.length - 1].roomie %></div>
+              <% } %>
             <form action="/chore4" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>

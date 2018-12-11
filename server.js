@@ -92,7 +92,7 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
 app.get('/', function(req, res) {
   // res.send('Hello World');
   // res.sendFile(__dirname + '/index.html');
-
+  // bad form sorry...
   chore1.find().toArray(function (err, result1) {
     chore2.find().toArray(function (err, result2) {
       chore3.find().toArray(function (err, result3) {
@@ -104,10 +104,9 @@ app.get('/', function(req, res) {
           res.render('index.ejs', {
             chore1: result1,
             chore2: result2,
-            chore3: result3, 
+            chore3: result3,
             chore4: result4
           });
-
         })
       })
     })
