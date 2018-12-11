@@ -1,13 +1,28 @@
 const mongo = require('mongodb').MongoClient;
 const client = require('socket.io').listen(4000).sockets;
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+var db;
 
 // Connect to mongodb
-mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
+mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomiechat', function(err, client) {
   if (err) {
     throw err;
   }
 
+  db = client.db('roomiechat');
+  app.listen(3000, function() {
+    console.log('listening on 3000');
+  });
+
+
+
   console.log('MongoDB connected...');
+
   // Connect to socket.io
   client.on('connection', function(socket) {
     let chat = db.collection('chats');
@@ -58,5 +73,22 @@ mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
         socket.emit('cleared');
       });
     });
+  });
+});
+
+app.get('/', function(req, res) {
+  // res.send('Hello World');
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/quotes', function (req, res) {
+  // console.log(req.body);
+  db.collection('quotes').save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    console.log('saved to database');
+    res.redirect('/');
   });
 });
