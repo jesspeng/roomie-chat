@@ -6,28 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Roomie Chat</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-      #messages{height:300px;}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 col-sm-12">
         <h1 class="text-center">
-          Roomie Chat
-          <button id="clear" class="btn btn-danger">Clear</button>
+          RoomieChat
         </h1>
         <div id="status"></div>
         <div id="chat">
-          <input type="text" id="username" class="form-control" placeholder="Enter name...">
-          <br>
           <div class="card">
             <div id="messages" class="card-block">
             </div>
           </div>
           <br>
+          <input type="text" id="username" class="form-control" placeholder="Enter name...">
           <textarea id="textarea" class="form-control" placeholder="Enter message..."></textarea>
+          <br>
+          <button id="clear" class="btn btn-danger">Clear Chat</button>
         </div>
       </div>
     </div>
@@ -115,7 +113,7 @@
         // Clear message and username
         socket.on('cleared', function() {
           messages.textContent = '';
-          username.innerHTML = ''; 
+          username.innerHTML = '';
         });
 
       }
