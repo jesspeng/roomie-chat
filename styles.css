@@ -1,29 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100|Roboto:100|Source+Sans+Pro:200');
 
+#app-title {
+  margin: 20px 0 20px 0;
+  font-size: 30px;
+  color: rgb(217, 55, 73);
+  font-weight: bold;
+}
 h1 {
   font-family: 'Roboto Slab';
   font-weight: bold;
-  color: rgb(202, 51, 69);
+  color: rgb(217, 55, 73);
 }
 
 #chore1 {
-  background-color: rgba(202, 51, 69, 1.0);;
+  background-color: rgba(217, 55, 73, 1.0);;
 }
 
 #chore2 {
-  background-color: rgba(202, 51, 69, 0.8);;
+  background-color: rgba(217, 55, 73, 0.8);;
 }
 
 #chore3 {
-  background-color: rgba(202, 51, 69, 0.7);;
+  background-color: rgba(217, 55, 73, 0.7);;
 }
 
 #chore4 {
-  background-color: rgba(202, 51, 69, 0.6);;
+  background-color: rgba(217, 55, 73, 0.6);;
 }
 
 .chore {
-  padding: 30px;
+  padding: 25px;
   font-family: 'Roboto Slab';
   font-weight: bold;
   font-size: 15px;
@@ -35,9 +41,14 @@ input {
   font-weight: bold;
 }
 
+#username {
+  margin: 10px 0 10px 0;
+}
+
 #textarea {
   font-family: 'Source Sans Pro';
   font-weight: bold;
+  margin: 0 0 20px 0;
 }
 
 #messages {
@@ -55,12 +66,12 @@ input {
 #status {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-  color: rgb(202, 51, 69);
+  color: rgb(217, 55, 73);
 }
 
-.container {
+.row {
   margin-top: 30px;
-  padding: 30px; 
+  padding: 30px;
   width: 100%;
   background-color: rgba(1, 1, 1, 0.05);
 }
