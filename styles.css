@@ -1,5 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100|Roboto:100|Source+Sans+Pro:200');
+
+h1 {
+  font-family: 'Roboto Slab';
+  font-weight: bold;
+  color: rgb(202, 51, 69);
+}
+
+#username {
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+}
+
+#textarea {
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+}
+
 #messages {
   height:300px;
   padding: 20px;
-  overflow: scroll; 
+  overflow: scroll;
+  font-family: 'Roboto';
+}
+
+#clear {
+  font-family: 'Roboto Slab';
+  font-weight: bold; 
+}
+
+.container {
+  margin-top: 30px;
 }
