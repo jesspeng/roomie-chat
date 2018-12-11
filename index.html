@@ -26,6 +26,10 @@
           </div>
           <input type="text" id="username" class="form-control" placeholder="Enter roomie...">
           <textarea id="textarea" class="form-control" placeholder="Enter message..."></textarea>
+          <div id="enter">
+            Press 'Enter' to Send
+          </div>
+          <br>
           <button id="clear" class="btn btn-danger">Clear Chat</button>
         </div>
       </div>
@@ -36,19 +40,35 @@
         <div id="chores">
           <div id="chore1" class="col chore">
             <u>Dishes</u>-Empty or run dishwasher, wipe counters, put dishes in dishwasher
-            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
+            <div class="card">
+              <div id="chorePeople" class="card-block">
+              </div>
+            </div>
+            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
           <div id="chore2" class="col chore">
             <u>Trash</u>-Take out the trash and recycling bin (every Tuesday)
-            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
+            <div class="card">
+              <div id="chorePeople" class="card-block">
+              </div>
+            </div>
+            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
           <div id="chore3" class="col chore">
             <u>Floor</u>-Vacuum floor (once a week), mop as needed
-            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
+            <div class="card">
+              <div id="chorePeople" class="card-block">
+              </div>
+            </div>
+            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
           <div id="chore4" class="col chore">
             <u>Kitchen</u>-Wipe stove top and kitchen counter
-            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
+            <div class="card">
+              <div id="chorePeople" class="card-block">
+              </div>
+            </div>
+            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
         </div>
       </div>
@@ -69,7 +89,7 @@
       var clearBtn = element('clear');
 
       // Get elements (chores)
-      
+      var chorePerson = element('chore-person');
 
       // Set default status to blank
       var statusDefault = status.textContent;
@@ -96,7 +116,7 @@
         socket.on('output', function(data) {
           //console.log(data);
           if (data.length) {
-            for (var x=0; x < data.length; x++) {
+            for (var x = 0; x < data.length; x++) {
               // build out message div to display name and chat
               var message = document.createElement('div');
               message.setAttribute('class', 'chat-message');
@@ -104,6 +124,12 @@
               messages.appendChild(message);
               // insert new chat on top ie most recent to least recent
               messages.insertBefore(message, messages.firstChild);
+
+              // build out chore person div
+              var chorePerson = document.createElement('div');
+              chorePerson.setAttribute('class', 'assigned-roomie');
+              chorePerson.textContent = data[x].chorePerson;
+              chores.appendChild(chorePerson);
             }
           }
         });
@@ -125,7 +151,7 @@
             // Emit to server input
             socket.emit('input', {
               name: username.value,
-              message: textarea.value
+              message: textarea.value,
             });
 
             event.preventDefault();

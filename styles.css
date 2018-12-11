@@ -36,10 +36,10 @@ h1 {
   color: white;
 }
 
-.chore-person {
+#chore-person {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-  margin: 10px 0 0 0; 
+  margin: 10px 0 0 0;
 }
 
 #username {
@@ -49,7 +49,6 @@ h1 {
 #textarea {
   font-family: 'Source Sans Pro';
   font-weight: bold;
-  margin: 0 0 20px 0;
 }
 
 #messages {
@@ -60,9 +59,24 @@ h1 {
   font-weight: 300;
 }
 
+#chorePeople {
+  height: 20px;
+  padding: 10px;
+  font-family: 'Roboto';
+  font-weight: 300;
+}
+
 #clear {
   font-family: 'Roboto Slab';
   font-weight: bold;
+  margin-top: 10px;
+}
+
+#enter {
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+  color: rgb(217, 55, 73);
+  font-size: 18px;
 }
 
 #status {

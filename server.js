@@ -11,11 +11,22 @@ mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
   // Connect to socket.io
   client.on('connection', function(socket) {
     let chat = db.collection('chats');
+    let chores = db.collection('chores');
 
     // Create function to send status
     sendStatus = function(s) {
       socket.emit('status', s); // emit passes something from server to client
     }
+
+    // Get chores from mongo collection
+    chores.find().toArray(function(err, res) {
+      if (err) {
+        throw err;
+      }
+
+      // Emit roomies assigned to chores
+      socket.emit('output', res);
+    });
 
     // Get chats from mongo collection
     chat.find().limit(100).sort({_id:1}).toArray(function(err, res) {
@@ -32,21 +43,35 @@ mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
       let name = data.name;
       let message = data.message;
 
-      // Check for name and message
-      if (name === '' || message === '') {
-        // Send error
-        sendStatus('Please send name or message');
-      } else {
-        // Insert message into database
-        chat.insert({name: name, message: message}, function(){
-          client.emit('output', [data]);
+      let chorePerson = data.chorePerson;
 
-          // Send status object
-          sendStatus({
-            message: 'Message sent',
-            clear: true
+      // Check for name and message
+      if ((name === '' || message === '') && chorePerson === '') {
+        // Send error
+        sendStatus('Invalid or missing information!');
+      } else {
+        if (chorePerson !== '') {
+          chores.insert({chorePerson: chorePerson}, function() {
+            client.emit('output', [data]);
+
+            // Send status object
+            sendStatus({
+              message: 'Chore assigned',
+              clear: true; 
+            });
           });
-        });
+        } else {
+          // Insert message into database
+          chat.insert({name: name, message: message}, function(){
+            client.emit('output', [data]);
+
+            // Send status object
+            sendStatus({
+              message: 'Message sent',
+              clear: true
+            });
+          });
+        }
       }
     });
 
