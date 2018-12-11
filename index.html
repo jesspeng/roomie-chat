@@ -12,7 +12,7 @@
   <div class="container">
     <div id="app-title">
       Roomie Manager
-    <div>
+    </div>
     <div class="row">
       <div class="col-md-6">
         <h1 class="text-center">
@@ -35,20 +35,20 @@
         </h1>
         <div id="chores">
           <div id="chore1" class="col chore">
-            Dishes-Empty or run dishwasher, wipe counters, put dishes in dishwasher
-            <input type="text" id="chore1-person" class="form-control" placeholder="Enter roomie...">
+            <u>Dishes</u>-Empty or run dishwasher, wipe counters, put dishes in dishwasher
+            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
           </div>
           <div id="chore2" class="col chore">
-            Trash-Take out the trash and recycling bin (every Tuesday)
-            <input type="text" id="chore2-person" class="form-control" placeholder="Enter roomie...">
+            <u>Trash</u>-Take out the trash and recycling bin (every Tuesday)
+            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
           </div>
           <div id="chore3" class="col chore">
-            Floor-Vacuum floor (once a week), mop as needed
-            <input type="text" id="chore3-person" class="form-control" placeholder="Enter roomie...">
+            <u>Floor</u>-Vacuum floor (once a week), mop as needed
+            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
           </div>
           <div id="chore4" class="col chore">
-            Kitchen-Wipe stove top and kitchen counter
-            <input type="text" id="chore4-person" class="form-control" placeholder="Enter roomie...">
+            <u>Kitchen</u>-Wipe stove top and kitchen counter
+            <input type="text" class="form-control chore-person" placeholder="Enter roomie...">
           </div>
         </div>
       </div>
@@ -61,12 +61,15 @@
         return document.getElementById(id);
       }
 
-      // Get elements
+      // Get elements (chat)
       var status = element('status');
       var messages = element('messages');
       var textarea = element('textarea');
       var username = element('username');
       var clearBtn = element('clear');
+
+      // Get elements (chores)
+      
 
       // Set default status to blank
       var statusDefault = status.textContent;

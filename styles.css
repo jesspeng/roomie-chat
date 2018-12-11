@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100|Roboto:100|Source+Sans+Pro:200');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100|Roboto:100,300|Source+Sans+Pro:200,300');
 
 #app-title {
   margin: 20px 0 20px 0;
@@ -36,9 +36,10 @@ h1 {
   color: white;
 }
 
-input {
+.chore-person {
   font-family: 'Source Sans Pro';
   font-weight: bold;
+  margin: 10px 0 0 0; 
 }
 
 #username {
@@ -56,6 +57,7 @@ input {
   padding: 20px;
   overflow: scroll;
   font-family: 'Roboto';
+  font-weight: 300;
 }
 
 #clear {
