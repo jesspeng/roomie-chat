@@ -47,9 +47,9 @@
           <div id="chore1" class="col chore">
             <u>Dishes</u>-Empty or run dishwasher, wipe counters, put dishes in dishwasher
 
-              <div class="assigned"><%= chore1[chore1.length - 1].roomie %></div>
+            <div class="assigned"><%= chore1[chore1.length - 1].roomie %></div>
 
-            <form action="/chores" method="POST">
+            <form action="/chore1" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
             </form>
@@ -57,8 +57,11 @@
 
           <div id="chore2" class="col chore">
             <u>Trash</u>-Take out the trash and recycling bin (every Tuesday)
+            <% if (typeof chore2 ==='object' && chore2) { %>
+              <div class="assigned"><%= chore2[chore2.length - 1].roomie %></div>
+              <% } %>
 
-            <form action="/chores" method="POST">
+            <form action="/chore2" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
             </form>
@@ -69,7 +72,7 @@
 
 
 
-            <form action="/chores" method="POST">
+            <form action="/chore3" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
             </form>
@@ -80,7 +83,7 @@
 
 
 
-            <form action="/chores" method="POST">
+            <form action="/chore4" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
               <button type="submit">Assign</button>
             </form>

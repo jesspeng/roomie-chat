@@ -6,7 +6,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(express.static(__dirname + '/public')); 
+app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 
@@ -102,12 +102,60 @@ app.get('/', function(req, res) {
     res.render('index.ejs', {chore1: result});
   });
 
+  chore2.find().toArray(function (err, result) {
+    console.log(result);
+    if (err) {
+      throw err;
+    }
+
+    res.render('index.ejs', {chore2: result});
+  });
+
 });
 
-app.post('/chores', function (req, res) {
+app.post('/chore1', function (req, res) {
    // console.log(req.body);
 
   chore1.save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    // console.log('saved to database');
+    res.redirect('/');
+  });
+});
+
+app.post('/chore2', function (req, res) {
+   // console.log(req.body);
+
+  chore2.save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    // console.log('saved to database');
+    res.redirect('/');
+  });
+});
+
+app.post('/chore3', function (req, res) {
+   // console.log(req.body);
+
+  chore3.save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    // console.log('saved to database');
+    res.redirect('/');
+  });
+});
+
+app.post('/chore4', function (req, res) {
+   // console.log(req.body);
+
+  chore4.save(req.body, function (err, result) {
     if (err) {
       throw err;
     }
