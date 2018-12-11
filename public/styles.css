@@ -61,6 +61,15 @@ h1 {
   font-weight: bold;
 }
 
+input {
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+}
+
+button {
+  font-weight: bold;
+}
+
 #messages {
   height:300px;
   padding: 20px;
@@ -95,9 +104,51 @@ h1 {
   color: rgb(217, 55, 73);
 }
 
-.row {
+#register {
   margin-top: 30px;
+}
+
+.main {
   padding: 30px;
   width: 100%;
   background-color: rgba(1, 1, 1, 0.05);
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(217, 55, 73, 0.5);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 30px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

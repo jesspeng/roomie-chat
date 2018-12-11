@@ -107,6 +107,7 @@ app.get('/', function(req, res) {
             chore3: result3,
             chore4: result4
           });
+
         })
       })
     })
