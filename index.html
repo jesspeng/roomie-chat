@@ -14,6 +14,8 @@
       Roomie Manager
     </div>
     <div class="row">
+
+
       <div class="col-md-6">
         <h1 class="text-center">
           Roomie Chat
@@ -33,11 +35,14 @@
           <button id="clear" class="btn btn-danger">Clear Chat</button>
         </div>
       </div>
+
+
       <div class="col-md-6">
         <h1 class="text-center">
           Chore Line-Up
         </h1>
         <div id="chores">
+
           <div id="chore1" class="col chore">
             <u>Dishes</u>-Empty or run dishwasher, wipe counters, put dishes in dishwasher
             <div class="card">
@@ -46,6 +51,7 @@
             </div>
             <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
+
           <div id="chore2" class="col chore">
             <u>Trash</u>-Take out the trash and recycling bin (every Tuesday)
             <div class="card">
@@ -54,6 +60,7 @@
             </div>
             <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
+
           <div id="chore3" class="col chore">
             <u>Floor</u>-Vacuum floor (once a week), mop as needed
             <div class="card">
@@ -62,6 +69,7 @@
             </div>
             <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
+
           <div id="chore4" class="col chore">
             <u>Kitchen</u>-Wipe stove top and kitchen counter
             <div class="card">
@@ -70,8 +78,11 @@
             </div>
             <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
           </div>
+
         </div>
       </div>
+
+
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
@@ -89,7 +100,8 @@
       var clearBtn = element('clear');
 
       // Get elements (chores)
-      var chorePerson = element('chore-person');
+      // var chorePeople = element('chorePeople');
+      // var chorePerson = element('chore-person');
 
       // Set default status to blank
       var statusDefault = status.textContent;
@@ -126,10 +138,10 @@
               messages.insertBefore(message, messages.firstChild);
 
               // build out chore person div
-              var chorePerson = document.createElement('div');
-              chorePerson.setAttribute('class', 'assigned-roomie');
-              chorePerson.textContent = data[x].chorePerson;
-              chores.appendChild(chorePerson);
+              // var chorePerson = document.createElement('div');
+              // chorePerson.setAttribute('class', 'assigned-roomie');
+              // chorePerson.textContent = data[x].chorePerson;
+              // chores.appendChild(chorePerson);
             }
           }
         });
@@ -152,6 +164,20 @@
             socket.emit('input', {
               name: username.value,
               message: textarea.value,
+              //chorePerson: chorePerson.value;
+            });
+
+            event.preventDefault();
+          }
+        });
+
+        username.addEventListener('keydown', function(event) {
+          if (event.which === 13 && event.shiftKey === false) { // 13 is return or enter
+            // Emit to server input
+            socket.emit('input', {
+              name: username.value,
+              message: textarea.value,
+              //chorePerson: chorePerson.value;
             });
 
             event.preventDefault();
