@@ -93,24 +93,25 @@ app.get('/', function(req, res) {
   // res.send('Hello World');
   // res.sendFile(__dirname + '/index.html');
 
-  chore1.find().toArray(function (err, result) {
-    // console.log(result);
-    if (err) {
-      throw err;
-    }
+  chore1.find().toArray(function (err, result1) {
+    chore2.find().toArray(function (err, result2) {
+      chore3.find().toArray(function (err, result3) {
+        chore4.find().toArray(function (err, result4) {
+          // console.log(result);
+          if (err) {
+            throw err;
+          }
+          res.render('index.ejs', {
+            chore1: result1,
+            chore2: result2,
+            chore3: result3, 
+            chore4: result4
+          });
 
-    res.render('index.ejs', {chore1: result});
+        })
+      })
+    })
   });
-
-  chore2.find().toArray(function (err, result) {
-    console.log(result);
-    if (err) {
-      throw err;
-    }
-
-    res.render('index.ejs', {chore2: result});
-  });
-
 });
 
 app.post('/chore1', function (req, res) {
