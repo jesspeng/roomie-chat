@@ -66,8 +66,14 @@ input {
   font-weight: bold;
 }
 
-button {
+#submit-btn {
   font-weight: bold;
+  font-family: 'Roboto Slab';
+}
+
+.assign-btn {
+  font-weight: bold;
+  font-family: 'Roboto Slab';
 }
 
 #messages {
@@ -177,7 +183,7 @@ h3 {
   color: rgb(217, 55, 73);
   font-family: 'Roboto Slab';
   font-weight: bold;
-  text-align: center; 
+  text-align: center;
 }
 
 .online {

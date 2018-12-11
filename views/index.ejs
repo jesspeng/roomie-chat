@@ -27,7 +27,7 @@
     <% } %>
   </div>
 
-  <span id="nav" onclick="openNav()">&#9776; Who's Online</span>
+  <span id="nav" onclick="openNav()">&#9776;</span>
 
   <div class="container">
     <div class="row header">
@@ -38,7 +38,7 @@
       <div id="register" class="col">
         <form action="/online" method="POST">
           <input type="text" placeholder="Enter name..." name="roomie">
-          <button type="submit">Submit</button>
+          <button id="submit-btn" type="submit">Submit</button>
         </form>
       </div>
     </div>
@@ -80,7 +80,7 @@
             <% } %>
             <form action="/chore1" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
-              <button type="submit">Assign</button>
+              <button class="assign-btn" type="submit">Assign</button>
             </form>
           </div>
 
@@ -93,7 +93,7 @@
             <% } %>
             <form action="/chore2" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
-              <button type="submit">Assign</button>
+              <button class="assign-btn" type="submit">Assign</button>
             </form>
           </div>
 
@@ -106,7 +106,7 @@
             <% } %>
             <form action="/chore3" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
-              <button type="submit">Assign</button>
+              <button class="assign-btn" type="submit">Assign</button>
             </form>
           </div>
 
@@ -119,7 +119,7 @@
             <% } %>
             <form action="/chore4" method="POST">
               <input type="text" placeholder="Roomie..." name="roomie">
-              <button type="submit">Assign</button>
+              <button class="assign-btn" type="submit">Assign</button>
             </form>
           </div>
         </div>
