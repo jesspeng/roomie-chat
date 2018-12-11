@@ -44,7 +44,7 @@
       var messages = element('messages');
       var textarea = element('textarea');
       var username = element('username');
-      var clear = element('clear');
+      var clearBtn = element('clear');
 
       // Set default status to blank
       var statusDefault = status.textContent;
@@ -105,6 +105,17 @@
 
             event.preventDefault();
           }
+        });
+
+        // Handle chat clear
+        clearBtn.addEventListener('click', function() {
+          socket.emit('clear');
+        });
+
+        // Clear message and username
+        socket.on('cleared', function() {
+          messages.textContent = '';
+          username.innerHTML = ''; 
         });
 
       }
