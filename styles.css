@@ -6,7 +6,31 @@ h1 {
   color: rgb(202, 51, 69);
 }
 
-#username {
+#chore1 {
+  background-color: rgba(202, 51, 69, 1.0);;
+}
+
+#chore2 {
+  background-color: rgba(202, 51, 69, 0.8);;
+}
+
+#chore3 {
+  background-color: rgba(202, 51, 69, 0.7);;
+}
+
+#chore4 {
+  background-color: rgba(202, 51, 69, 0.6);;
+}
+
+.chore {
+  padding: 30px;
+  font-family: 'Roboto Slab';
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+}
+
+input {
   font-family: 'Source Sans Pro';
   font-weight: bold;
 }
@@ -25,9 +49,18 @@ h1 {
 
 #clear {
   font-family: 'Roboto Slab';
-  font-weight: bold; 
+  font-weight: bold;
+}
+
+#status {
+  font-family: 'Source Sans Pro';
+  font-weight: bold;
+  color: rgb(202, 51, 69);
 }
 
 .container {
   margin-top: 30px;
+  padding: 30px; 
+  width: 100%;
+  background-color: rgba(1, 1, 1, 0.05);
 }
