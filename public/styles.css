@@ -6,6 +6,16 @@
   color: rgb(217, 55, 73);
   font-weight: bold;
 }
+
+.assigned {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  font-family: Arial;
+  margin: 5px 0 5px 0;
+}
+
 h1 {
   font-family: 'Roboto Slab';
   font-weight: bold;

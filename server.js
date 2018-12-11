@@ -6,7 +6,16 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(express.static(__dirname + '/public')); 
+
+app.set('view engine', 'ejs');
+
 var db;
+
+let chore1;
+let chore2;
+let chore3;
+let chore4;
 
 // Connect to mongodb
 mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomiechat', function(err, client) {
@@ -19,9 +28,12 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
     console.log('listening on 3000');
   });
 
-
-
   console.log('MongoDB connected...');
+
+  chore1 = db.collection('chore1');
+  chore2 = db.collection('chore2');
+  chore3 = db.collection('chore3');
+  chore4 = db.collection('chore4');
 
   // Connect to socket.io
   client.on('connection', function(socket) {
@@ -76,19 +88,31 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
   });
 });
 
+
 app.get('/', function(req, res) {
   // res.send('Hello World');
-  res.sendFile(__dirname + '/index.html');
-});
+  // res.sendFile(__dirname + '/index.html');
 
-app.post('/quotes', function (req, res) {
-  // console.log(req.body);
-  db.collection('quotes').save(req.body, function (err, result) {
+  chore1.find().toArray(function (err, result) {
+    // console.log(result);
     if (err) {
       throw err;
     }
 
-    console.log('saved to database');
+    res.render('index.ejs', {chore1: result});
+  });
+
+});
+
+app.post('/chores', function (req, res) {
+   // console.log(req.body);
+
+  chore1.save(req.body, function (err, result) {
+    if (err) {
+      throw err;
+    }
+
+    // console.log('saved to database');
     res.redirect('/');
   });
 });
