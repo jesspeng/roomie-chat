@@ -6,110 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Roomie Chat</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="/styles.css"> -->
+    <link href="/styles.css" rel="stylesheet" type="text/css">
 </head>
-<style>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100|Roboto:100,300|Source+Sans+Pro:200,300');
 
-#app-title {
-  margin: 20px 0 20px 0;
-  font-size: 30px;
-  color: rgb(217, 55, 73);
-  font-weight: bold;
-}
-h1 {
-  font-family: 'Roboto Slab';
-  font-weight: bold;
-  color: rgb(217, 55, 73);
-}
-
-#chore1 {
-  background-color: rgba(217, 55, 73, 1.0);;
-}
-
-#chore2 {
-  background-color: rgba(217, 55, 73, 0.8);;
-}
-
-#chore3 {
-  background-color: rgba(217, 55, 73, 0.7);;
-}
-
-#chore4 {
-  background-color: rgba(217, 55, 73, 0.6);;
-}
-
-.chore {
-  padding: 25px;
-  font-family: 'Roboto Slab';
-  font-weight: bold;
-  font-size: 15px;
-  color: white;
-}
-
-#chore-person {
-  font-family: 'Source Sans Pro';
-  font-weight: bold;
-  margin: 10px 0 0 0;
-}
-
-#username {
-  margin: 10px 0 10px 0;
-}
-
-#textarea {
-  font-family: 'Source Sans Pro';
-  font-weight: bold;
-}
-
-#messages {
-  height:300px;
-  padding: 20px;
-  overflow: scroll;
-  font-family: 'Roboto';
-  font-weight: 300;
-}
-
-#chorePeople {
-  height: 20px;
-  padding: 10px;
-  font-family: 'Roboto';
-  font-weight: 300;
-}
-
-#clear {
-  font-family: 'Roboto Slab';
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-#enter {
-  font-family: 'Source Sans Pro';
-  font-weight: bold;
-  color: rgb(217, 55, 73);
-  font-size: 18px;
-}
-
-#status {
-  font-family: 'Source Sans Pro';
-  font-weight: bold;
-  color: rgb(217, 55, 73);
-}
-
-.row {
-  margin-top: 30px;
-  padding: 30px;
-  width: 100%;
-  background-color: rgba(1, 1, 1, 0.05);
-}
-</style>
 <body>
   <div class="container">
     <div id="app-title">
       Roomie Manager
     </div>
     <div class="row">
-
 
       <div class="col-md-6">
         <h1 class="text-center">
@@ -137,147 +42,59 @@ h1 {
           Chore Line-Up
         </h1>
 
-        <form action="/quotes" method="POST">
-          <input type="text" placeholder="name" name="name">
-          <input type="text" placeholder="quote" name="quote">
-          <button type="submit">Submit</button>
-        </form>
-
         <div id="chores">
 
           <div id="chore1" class="col chore">
             <u>Dishes</u>-Empty or run dishwasher, wipe counters, put dishes in dishwasher
-            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
+
+            <div class="assigned"><%= chore1[chore1.length - 1].roomie %></div>
+
+            <form action="/chore1" method="POST">
+              <input type="text" placeholder="Roomie..." name="roomie">
+              <button type="submit">Assign</button>
+            </form>
           </div>
 
           <div id="chore2" class="col chore">
             <u>Trash</u>-Take out the trash and recycling bin (every Tuesday)
-            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
+            <% if (typeof chore2 ==='object' && chore2) { %>
+              <div class="assigned"><%= chore2[chore2.length - 1].roomie %></div>
+              <% } %>
+            <form action="/chore2" method="POST">
+              <input type="text" placeholder="Roomie..." name="roomie">
+              <button type="submit">Assign</button>
+            </form>
           </div>
 
           <div id="chore3" class="col chore">
             <u>Floor</u>-Vacuum floor (once a week), mop as needed
-            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
+            <% if (typeof chore3 ==='object' && chore3) { %>
+              <div class="assigned"><%= chore3[chore3.length - 1].roomie %></div>
+              <% } %>
+            <form action="/chore3" method="POST">
+              <input type="text" placeholder="Roomie..." name="roomie">
+              <button type="submit">Assign</button>
+            </form>
           </div>
 
           <div id="chore4" class="col chore">
             <u>Kitchen</u>-Wipe stove top and kitchen counter
-            <input type="text" id="chore-person" class="form-control" placeholder="Enter roomie...">
+            <% if (typeof chore4 ==='object' && chore4) { %>
+              <div class="assigned"><%= chore4[chore4.length - 1].roomie %></div>
+              <% } %>
+            <form action="/chore4" method="POST">
+              <input type="text" placeholder="Roomie..." name="roomie">
+              <button type="submit">Assign</button>
+            </form>
           </div>
 
         </div>
       </div>
 
-
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
-  <script>
-    (function() {
-      var element = function(id) {
-        return document.getElementById(id);
-      }
+  <script src="/chatmanager.js" type="text/javascript">
 
-      // Get elements (chat)
-      var status = element('status');
-      var messages = element('messages');
-      var textarea = element('textarea');
-      var username = element('username');
-      var clearBtn = element('clear');
-
-      // Get elements (chores)
-      // var chorePeople = element('chorePeople');
-      // var chorePerson = element('chore-person');
-
-      // Set default status to blank
-      var statusDefault = status.textContent;
-      var setStatus = function(s) {
-        // Set status
-        status.textContent = s;
-
-        // Send update message which disappears after 4 seconds
-        if (s !== statusDefault) {
-          var delay = setTimeout(function () {
-            setStatus(statusDefault);
-          }, 4000);
-        }
-      }
-
-      // Connect to socket.io
-      var socket = io.connect('http://127.0.0.1:4000');
-
-      // Check for connection
-      if (socket !== undefined) {
-        console.log('Connected to socket.io...');
-
-        // Handle output
-        socket.on('output', function(data) {
-          //console.log(data);
-          if (data.length) {
-            for (var x = 0; x < data.length; x++) {
-              // build out message div to display name and chat
-              var message = document.createElement('div');
-              message.setAttribute('class', 'chat-message');
-              message.textContent = data[x].name+": "+data[x].message;
-              messages.appendChild(message);
-              // insert new chat on top ie most recent to least recent
-              messages.insertBefore(message, messages.firstChild);
-            }
-          }
-        });
-
-        // Get status from server
-        socket.on('status', function(data) {
-          // Get message status
-          setStatus((typeof data === 'object') ? data.message : data);
-
-          // check to see if status is clear-> clear text
-          if (data.clear) {
-            textarea.value = '';
-          }
-        });
-
-        // Handle input, want event when typing message
-        textarea.addEventListener('keydown', function(event) {
-          if (event.which === 13 && event.shiftKey === false) { // 13 is return or enter
-            // Emit to server input
-            socket.emit('input', {
-              name: username.value,
-              message: textarea.value,
-              //chorePerson: chorePerson.value;
-            });
-
-            event.preventDefault();
-          }
-        });
-
-        username.addEventListener('keydown', function(event) {
-          if (event.which === 13 && event.shiftKey === false) { // 13 is return or enter
-            // Emit to server input
-            socket.emit('input', {
-              name: username.value,
-              message: textarea.value,
-              //chorePerson: chorePerson.value;
-            });
-
-            event.preventDefault();
-          }
-        });
-
-        // Handle chat clear
-        clearBtn.addEventListener('click', function() {
-          socket.emit('clear');
-        });
-
-        // Clear message and username
-        socket.on('cleared', function() {
-          messages.textContent = '';
-          username.innerHTML = '';
-        });
-
-      }
-
-    })();
-  </script>
 </body>
 </html>
