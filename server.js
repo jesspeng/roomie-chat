@@ -23,6 +23,8 @@ mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
   if (err) {
     throw err;
   }
+  app.listen((process.env.PORT), function() {
+  });
 
   // Connect to socket.io
   client.on('connection', function(socket) {
@@ -200,6 +202,4 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
       }
     });
   });
-
-
 });
