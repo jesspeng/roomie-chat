@@ -23,7 +23,7 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
   if (err) {
     throw err;
   }
-  app.listen((process.env.PORT || '127.0.0.1'), function() {
+  app.listen((process.env.PORT), function() {
   });
 
   // Connect to socket.io
