@@ -183,3 +183,17 @@ app.post('/online', function (req, res) {
     res.redirect('/');
   });
 });
+
+app.delete('/online', function(req, res) {
+  // Handle delete event Here
+  online.findOneAndDelete({roomie:
+    req.body.roomie,
+    function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      res.send({message: 'User has signed off'});
+    }
+  });
+});
