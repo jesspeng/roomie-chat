@@ -205,11 +205,13 @@ h3 {
 }
 
 #delete {
-  font-weight: bold;
-  font-family: 'Roboto Slab';
-  font-size: 15px;
-  background-color: none;
-  color: black;
-  text-decoration: underline;
-  border-size: 0;
+  background:none!important;
+  color:inherit;
+  border:none;
+  padding:0!important;
+  font: inherit;
+  /*border is optional*/
+  border-bottom:1px solid #444;
+  cursor: pointer;
+  margin-left: 20px; 
 }

@@ -61,6 +61,7 @@
 
     // Handle input, want event when typing message
     textarea.addEventListener('keydown', function(event) {
+      // console.log('pressed Enter2');
       if (event.which === 13 && event.shiftKey === false) { // 13 is return or enter
         // Emit to server input
         socket.emit('input', {
@@ -68,7 +69,7 @@
           message: textarea.value,
           //chorePerson: chorePerson.value;
         });
-
+        // console.log(username.value);
         event.preventDefault();
       }
     });

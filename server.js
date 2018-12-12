@@ -39,9 +39,114 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
 
   online = db.collection('online');
 
+  app.get('/', function(req, res) {
+    // res.send('Hello World');
+    // res.sendFile(__dirname + '/index.html');
+    // bad form sorry...
+    chore1.find().toArray(function (err, result1) {
+      chore2.find().toArray(function (err, result2) {
+        chore3.find().toArray(function (err, result3) {
+          chore4.find().toArray(function (err, result4) {
+            online.find().toArray(function (err, result5) {
+              if (err) {
+                throw err;
+              }
+              res.render('index.ejs', {
+                chore1: result1,
+                chore2: result2,
+                chore3: result3,
+                chore4: result4,
+                online: result5
+              });
+            })
+          })
+        })
+      })
+    });
+  });
+
+  app.post('/chore1', function (req, res) {
+     // console.log(req.body);
+
+    chore1.save(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      }
+
+      // console.log('saved to database');
+      res.redirect('/');
+    });
+  });
+
+  app.post('/chore2', function (req, res) {
+     // console.log(req.body);
+
+    chore2.save(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      }
+
+      // console.log('saved to database');
+      res.redirect('/');
+    });
+  });
+
+  app.post('/chore3', function (req, res) {
+     // console.log(req.body);
+
+    chore3.save(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      }
+
+      // console.log('saved to database');
+      res.redirect('/');
+    });
+  });
+
+  app.post('/chore4', function (req, res) {
+     // console.log(req.body);
+
+    chore4.save(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      }
+
+      // console.log('saved to database');
+      res.redirect('/');
+    });
+  });
+
+  app.post('/online', function (req, res) {
+     // console.log(req.body);
+
+    online.save(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      }
+
+      // console.log('saved to database');
+      res.redirect('/');
+    });
+  });
+
+  app.delete('/online', function(req, res) {
+    // Handle delete event Here
+    online.findOneAndDelete({roomie:
+      req.body,
+      function(err, result) {
+        if (err) {
+          throw err;
+        }
+
+        res.send({message: 'User has signed off'});
+      }
+    });
+  });
+
   // Connect to socket.io
   client.on('connection', function(socket) {
-    let chat = db.collection('chats');
+    let chats = db.collection('chats');
 
     // Create function to send status
     sendStatus = function(s) {
@@ -49,7 +154,7 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
     }
 
     // Get chats from mongo collection
-    chat.find().limit(100).sort({_id:1}).toArray(function(err, res) {
+    chats.find().limit(100).sort({_id:1}).toArray(function(err, res) {
       if (err) {
         throw err;
       }
@@ -69,7 +174,7 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
         sendStatus('Invalid or missing information!');
       } else {
         // Insert message into database
-        chat.insert({name: name, message: message}, function(){
+        chats.insert({name: name, message: message}, function(){
           client.emit('output', [data]);
 
           // Send status object
@@ -84,116 +189,10 @@ mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomie
     // Handle clear
     socket.on('clear', function(data) {
       // Remove all chats from collection
-      chat.remove({}, function() {
+      chats.remove({}, function() {
         // Emit event letting client know that everything has been cleared
         socket.emit('cleared');
       });
     });
-  });
-});
-
-
-app.get('/', function(req, res) {
-  // res.send('Hello World');
-  // res.sendFile(__dirname + '/index.html');
-  // bad form sorry...
-  chore1.find().toArray(function (err, result1) {
-    chore2.find().toArray(function (err, result2) {
-      chore3.find().toArray(function (err, result3) {
-        chore4.find().toArray(function (err, result4) {
-          online.find().toArray(function (err, result5) {
-            if (err) {
-              throw err;
-            }
-            res.render('index.ejs', {
-              chore1: result1,
-              chore2: result2,
-              chore3: result3,
-              chore4: result4,
-              online: result5
-            });
-          })
-        })
-      })
-    })
-  });
-});
-
-app.post('/chore1', function (req, res) {
-   // console.log(req.body);
-
-  chore1.save(req.body, function (err, result) {
-    if (err) {
-      throw err;
-    }
-
-    // console.log('saved to database');
-    res.redirect('/');
-  });
-});
-
-app.post('/chore2', function (req, res) {
-   // console.log(req.body);
-
-  chore2.save(req.body, function (err, result) {
-    if (err) {
-      throw err;
-    }
-
-    // console.log('saved to database');
-    res.redirect('/');
-  });
-});
-
-app.post('/chore3', function (req, res) {
-   // console.log(req.body);
-
-  chore3.save(req.body, function (err, result) {
-    if (err) {
-      throw err;
-    }
-
-    // console.log('saved to database');
-    res.redirect('/');
-  });
-});
-
-app.post('/chore4', function (req, res) {
-   // console.log(req.body);
-
-  chore4.save(req.body, function (err, result) {
-    if (err) {
-      throw err;
-    }
-
-    // console.log('saved to database');
-    res.redirect('/');
-  });
-});
-
-app.post('/online', function (req, res) {
-   // console.log(req.body);
-
-  online.save(req.body, function (err, result) {
-    if (err) {
-      throw err;
-    }
-
-    // console.log('saved to database');
-    res.redirect('/');
-  });
-});
-
-app.delete('/online', function(req, res) {
-  // Handle delete event Here
-  online.findOneAndDelete({roomie:
-    req.body.roomie,
-    function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      res.send({message: 'User has signed off'});
-    }
   });
 });

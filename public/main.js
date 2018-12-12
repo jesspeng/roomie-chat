@@ -1,14 +1,13 @@
-var del = document.getElementById('delete');
-
-del.addEventListener('click', function() {
-  console.log('delete pressed'); 
+function deleteUser(name) {
+  console.log('deleteUsercalled');
+  console.log(name === ''); 
   fetch('online', {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      'roomie': 'roomie'
+      'roomie': name
     })
   })
   .then(res => {
@@ -18,4 +17,4 @@ del.addEventListener('click', function() {
     console.log(data);
     window.location.reload();
   })
-});
+}
