@@ -19,7 +19,7 @@ let chore4;
 
 let online;
 
-mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomiechat', function(err, db) {
+mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
   if (err) {
     throw err;
   }
