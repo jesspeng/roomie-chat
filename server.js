@@ -19,11 +19,11 @@ let chore4;
 
 let online;
 
-mongo.connect('mongodb://127.0.0.1/roomiechat', function(err, db) {
+mongo.connect('mongodb://jesspeng:Whackmypinata10@ds131814.mlab.com:31814/roomiechat', function(err, db) {
   if (err) {
     throw err;
   }
-  app.listen((process.env.PORT), function() {
+  app.listen((process.env.PORT || '127.0.0.1'), function() {
   });
 
   // Connect to socket.io
